@@ -95,9 +95,17 @@ pnpm -v
 
 ## 全局安装nodemon
 
-pnpm add -g nodemon
+如果使用 pnpm 全局安装报错，先在终端使用 pnpm setup ，之后重启电脑；如果还不行，主动设置文件夹，并手动添加环境变量，并重启电脑
+
+![image-20260105214607670](node笔记/image-20260105214607670.png)
 
 ```
+全局安装方式
+pnpm add -g nodemon
+
+单个项目安装方式
+pnpm add nodemon -g
+
 查看全局安装的包
 pnpm list -g
 ```
@@ -105,6 +113,8 @@ pnpm list -g
 ![image-20251112004237530](node笔记/image-20251112004237530.png)
 
 之后package.json文件中的scripts如图配置
+
+使用 pnpm run dev 启动项目
 
 
 

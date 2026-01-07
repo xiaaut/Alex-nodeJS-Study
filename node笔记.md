@@ -218,6 +218,14 @@ app.post('/profile', (req, res, next) => {
 
 
 
+## JSON的处理方法
+
+### JSON.stringify() 和 JSON.parse()
+
+![image-20260107182914677](node笔记/image-20260107182914677.png)
+
+
+
 ## http请求方法
 
 ### get
@@ -306,6 +314,7 @@ const express = require('express')
 const app = express()
 
 app.use(express.json()) // for parsing application/json
+
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.post('/profile', (req, res, next) => {

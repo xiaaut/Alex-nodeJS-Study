@@ -311,6 +311,12 @@ port 端口
 
 
 
+## express 项目化文件目录
+
+![image-20260109005806537](node笔记/image-20260109005806537.png)
+
+
+
 ## sequelize
 
 `sequelize` 是一个基于 Node.js 的 ORM（对象关系映射）工具，它允许你通过 JavaScript/TypeScript 代码操作关系型数据库（如 MySQL、PostgreSQL、SQLite、MSSQL 等），无需直接编写 SQL 语句，而是通过面向对象的方式操作数据。

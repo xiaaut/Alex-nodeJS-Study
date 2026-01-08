@@ -287,88 +287,13 @@ port 端口
 
 
 
-## http请求方法
-
-### get
-
-请求到的数据都从地址栏中获取
-
-增删改查都可以使用get方法，但是新增内容有文本限制，超出就会报错
-
-```javascript
-app.get('/todos', async (_req, res) => {
-  const todosData = await readFile('./data.json', 'utf-8');
-  const todos = JSON.parse(todosData);
-
-  return res.status(200).json(todos);
-});
-```
-
-### post
-
-想要通过req.body添加数据时，需要使用 express.json() 中间件
-
-```js
-const express = require('express')
-
-const app = express()
-
-app.use(express.json()) // for parsing application/json
-
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
-app.post('/profile', (req, res, next) => {
-  console.log(req.body)
-  res.json(req.body)
-})
-```
-
-后端代码：
-
-![](node笔记/image-20251113014954454.png)
-
-前端代码react：
-
-![image-20251113015028720](node笔记/image-20251113015028720.png)
-
-
-
-### 端点
-
-endpoint 端点
-
-![image-20251119002114448](node笔记/image-20251119002114448.png)
-
-API是“菜单”，endpoint是“菜单”上的每一道菜
-
-
-
-### 端口
-
-port 端口
-
-
-
-
-
-
-
 ## 扩展运算符
 
 ![](node笔记/image-20251113013010783.png)
 
 
 
-
-## 扩展运算符
-
-![](node笔记/image-20251113013010783.png)
-
-
-
-
-
-# env配置文件
+## env配置文件
 
 如何使用.env配置文件
 
@@ -382,13 +307,41 @@ port 端口
   },
 ```
 
-# sequelize
+![image-20260108210229194](node笔记/image-20260108210229194.png)
+
+
+
+## sequelize
 
 `sequelize` 是一个基于 Node.js 的 ORM（对象关系映射）工具，它允许你通过 JavaScript/TypeScript 代码操作关系型数据库（如 MySQL、PostgreSQL、SQLite、MSSQL 等），无需直接编写 SQL 语句，而是通过面向对象的方式操作数据。
 
 pnpm add sequelize
 
 pnpm add pg pg-hstore
+
+
+
+# apifox 使用方式
+
+## 开发环境如何配置
+
+![image-20260108171734010](node笔记/image-20260108171734010.png)
+
+## 含有参数的请求方式
+
+![image-20260108171816955](node笔记/image-20260108171816955.png)
+
+## 删除的方式
+
+![image-20260108171846738](node笔记/image-20260108171846738.png)
+
+## 新增的方式
+
+![image-20260108172056411](node笔记/image-20260108172056411.png)
+
+修改的方式
+
+![image-20260108172131987](node笔记/image-20260108172131987.png)
 
 
 

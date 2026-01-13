@@ -4,6 +4,12 @@ import Todo from '../models/todoModel.js';
 
 try {
   // Read initialize data
+  // const initializeTodosString = await readFile(
+  //   './src/scripts/data/initData.json',
+  //   'utf-8'
+  // );
+  // const initializeTodos = JSON.parse(initializeTodosString);
+
   const initializeTodosString = await readFile(
     './src/scripts/data/initData.json',
     'utf-8'

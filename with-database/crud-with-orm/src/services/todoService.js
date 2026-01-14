@@ -11,7 +11,10 @@ export async function getTodoById (todoId) {
     return todo
 }
 
-export async function deleteTodoById (todoId) { }
+export async function deleteTodoById (todoId) {
+    await Todo.destroy({ where: { id: todoId } })
+
+}
 
 export async function createTodo (addTodo) {
     const addedTodo = await Todo.create(addTodo);
@@ -19,4 +22,8 @@ export async function createTodo (addTodo) {
     return addedTodo;
 }
 
-export async function updateTodo (updateTodo) { }
+export async function updateTodo (updateTodo) {
+    await Todo.update(updateTodo, {
+        where: { id: updateTodo.id }
+    })
+}

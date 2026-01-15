@@ -8,7 +8,7 @@ const databaseConfig = {
   port: Number(process.env.DB_PORT),
 };
 
-// console.log(databaseConfig);
+console.log(databaseConfig);
 
 const sequelize = new Sequelize(
   databaseConfig.database,

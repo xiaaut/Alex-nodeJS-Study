@@ -22,42 +22,24 @@ type TodoListProps = {
   todoQueryClient: QueryClient;
 };
 
-export default function TodoList({
-  showToast,
-  todoQueryClient,
-}: TodoListProps) {
+export default function TodoList({ showToast, todoQueryClient }: TodoListProps) {
   const isTodoLoading = useAtomValue(isTodoLoadingAtom);
 
   const setCurrentTodoStartIndex = useSetAtom(currentTodoStartIndexAtom);
 
-  const {
-    todos,
-    deleteTodo,
-    isTodoLoadError,
-    handleClickEditTodo,
-    isTodoContentGetting,
-  } = useTodoList(todoQueryClient, showToast);
+  const { todos, deleteTodo, isTodoLoadError, handleClickEditTodo, isTodoContentGetting } = useTodoList(todoQueryClient, showToast);
 
   const searchText = useAtomValue(searchTextAtom);
   // TODO: Filter todo list by refetch
-  const filteredTodos = todos?.filter((todo) => {
+  const filteredTodos = todos?.filter(todo => {
     return todo.title.toLowerCase().includes(searchText.toLowerCase());
   });
 
   const itemTemplate = (todo: Todo, index: number) => {
     return (
       <div className="col-12" key={todo.id}>
-        <div
-          className={classNames(
-            'flex flex-column xl:flex-row xl:align-items-start p-4 gap-4',
-            { 'border-top-1 surface-border': index !== 0 }
-          )}
-        >
-          <img
-            className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
-            src={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/QWER_Southkorean_band.png/500px-QWER_Southkorean_band.png`}
-            alt={todo.title}
-          />
+        <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
+          <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/QWER_Southkorean_band.png/500px-QWER_Southkorean_band.png`} alt={todo.title} />
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
               <div className="text-2xl font-bold text-900">{todo.title}</div>
@@ -116,24 +98,14 @@ export default function TodoList({
       {!isTodoLoading && isTodoLoadError && <div>Something went wrong</div>}
       {!isTodoLoading && !isTodoLoadError && (
         <>
-          {/* <DataView value={todos} listTemplate={listTemplate} /> */}
-          <DataView
-            value={filteredTodos}
-            listTemplate={listTemplate}
-            paginator
-            rows={5}
-          />
+          <DataView value={todos} listTemplate={listTemplate} />
+          {/* <DataView value={filteredTodos} listTemplate={listTemplate} paginator rows={5} /> */}
           {/* TODO: Add manual paginator */}
-          {/* <AppPaginator /> */}
+          <AppPaginator />
         </>
       )}
       <div className="flex justify-content-center">
-        <Button
-          label="Add"
-          disabled={isTodoLoading}
-          size="large"
-          onClick={() => handleClickEditTodo()}
-        />
+        <Button label="Add" disabled={isTodoLoading} size="large" onClick={() => handleClickEditTodo()} />
       </div>
     </div>
   );

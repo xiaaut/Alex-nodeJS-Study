@@ -4,15 +4,20 @@ import {
   deleteTodoById as deleteTodoByIdApi,
   createTodo as createTodoApi,
   updateTodo as updateTodoApi,
+  countTodo as countTodoApi
 } from '../services/todoService.js';
 
-export async function getTodos(_req, res) {
-  const todos = await getAllTodos();
+export async function getTodos (req, res) {
+  const page = req.query.page;
+  const limit = req.query.limit;
+
+  const offset = (page - 1) * limit;
+  const todos = await getAllTodos(offset, limit);
 
   return res.status(200).json(todos);
 }
 
-export async function getTodoById(req, res) {
+export async function getTodoById (req, res) {
   if (!req.params.todoId) {
     return res.status(400).send('todoId is required');
   }
@@ -26,7 +31,7 @@ export async function getTodoById(req, res) {
   return res.status(404).send('404 Not Found');
 }
 
-export async function deleteTodoById(req, res) {
+export async function deleteTodoById (req, res) {
   const todoId = req.params.todoId;
 
   if (!todoId) {
@@ -40,7 +45,7 @@ export async function deleteTodoById(req, res) {
   });
 }
 
-export async function createTodo(req, res) {
+export async function createTodo (req, res) {
   const addTodo = req.body;
 
   if (!addTodo) {
@@ -55,7 +60,7 @@ export async function createTodo(req, res) {
   });
 }
 
-export async function updateTodo(req, res) {
+export async function updateTodo (req, res) {
   const updateTodo = req.body;
 
   const updatedTodo = await updateTodoApi(updateTodo);
@@ -63,5 +68,14 @@ export async function updateTodo(req, res) {
   return res.status(200).json({
     message: 'Todo updated successfully',
     data: updatedTodo,
+  });
+}
+
+
+export async function countTodo (_req, res) {
+  const todoCount = await countTodoApi();
+
+  return res.status(200).json({
+    count: todoCount
   });
 }

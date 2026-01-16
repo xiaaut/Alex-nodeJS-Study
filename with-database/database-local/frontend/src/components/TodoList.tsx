@@ -1,21 +1,20 @@
-import { QueryClient } from '@tanstack/react-query';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { QueryClient } from "@tanstack/react-query";
+import { useAtomValue, useSetAtom } from "jotai";
 
-import { Button } from 'primereact/button';
-import { DataView } from 'primereact/dataview';
-import { classNames } from 'primereact/utils';
+import { Button } from "primereact/button";
+import { DataView } from "primereact/dataview";
+import { classNames } from "primereact/utils";
 
-import { Todo } from '../types/Todo';
-import { ToastSeverity } from '../types/ToastSeverity';
+import { Todo } from "../types/Todo";
+import { ToastSeverity } from "../types/ToastSeverity";
 
-import { useTodoList } from '../hooks/todo/todoList.ts';
+import { useTodoList } from "../hooks/todo/todoList.ts";
 
-import { isTodoLoadingAtom } from '../atoms/todo.ts';
+import { isTodoLoadingAtom } from "../atoms/todo.ts";
 
-import Spinner from './Spinner.tsx';
-import AppPaginator from './AppPaginator.tsx';
-import { currentTodoStartIndexAtom } from '../atoms/pagination.ts';
-import { searchTextAtom } from '../atoms/search.ts';
+import Spinner from "./Spinner.tsx";
+import AppPaginator from "./AppPaginator.tsx";
+import { currentTodoStartIndexAtom } from "../atoms/pagination.ts";
 
 type TodoListProps = {
   showToast: (severity: ToastSeverity, summary: string) => void;
@@ -43,8 +42,8 @@ export default function TodoList({
       <div className="col-12" key={todo.id}>
         <div
           className={classNames(
-            'flex flex-column xl:flex-row xl:align-items-start p-4 gap-4',
-            { 'border-top-1 surface-border': index !== 0 }
+            "flex flex-column xl:flex-row xl:align-items-start p-4 gap-4",
+            { "border-top-1 surface-border": index !== 0 }
           )}
         >
           <img
@@ -67,7 +66,7 @@ export default function TodoList({
               <Button
                 disabled={isTodoContentGetting}
                 onClick={async () => {
-                  showToast('info', 'Loading todo content...');
+                  showToast("info", "Loading todo content...");
                   await handleClickEditTodo(todo);
                 }}
                 icon="pi pi-pen-to-square"
@@ -78,7 +77,7 @@ export default function TodoList({
                 onClick={() =>
                   deleteTodo(todo.id, {
                     onSuccess: () => {
-                      showToast('success', 'Successfully deleted todo');
+                      showToast("success", "Successfully deleted todo");
                       setCurrentTodoStartIndex(0);
                     },
                   })
@@ -111,7 +110,6 @@ export default function TodoList({
       {!isTodoLoading && !isTodoLoadError && (
         <>
           <DataView value={todos} listTemplate={listTemplate} />
-
           <AppPaginator />
         </>
       )}
